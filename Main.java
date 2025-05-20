@@ -1,10 +1,36 @@
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class Main
-{
+public class Main {
     
-    public class Game {
+    public static class GenerateData {
+        ArrayList<Game> lista = new ArrayList<Game>(); 
+        String name;
+        String category;
+        int prince;
+        int quality;
+        
+        public Game nuevo_juego(){
+            String[] palabras = {"Dragon", "Empire", "Quest", "Galaxy","Legends", "Warrior"};
+            int rnd1 = new Random().nextInt(palabras.length);
+            int rnd2 = new Random().nextInt(palabras.length);
+            String nombre_juego = palabras[rnd1] + palabras[rnd2];
+            
+            String[] categorias = {"Acción", "Aventura", "Estrategia", "RPG","Deportes", "Simulación"};
+            int rnd3 = new Random().nextInt(categorias.length);
+            String categoria_juego = categorias[rnd3];
+            
+            int rnd4 = (int) (Math.random() * 70000) + 1;
+            int rnd5 = (int) (Math.random() * 100) + 1;
+            
+            Game game = new Game(nombre_juego,categoria_juego, rnd4, rnd5);
+            return game;
+        }
+        
+    }
+    
+    public static class Game {
         String name;
         String category;
         int price;
@@ -16,6 +42,14 @@ public class Main
             this.price = price;
             this.quality = quality;
         }
+        
+        void mostrarDatos(){
+            System.out.println("Nombre: " + this.name);
+            System.out.println("Categoria: " + this.category);
+            System.out.println("Precio: " + this.price);
+            System.out.println("Calidad: " + this.quality);
+        }
+        
     }
     
     
@@ -55,6 +89,8 @@ public class Main
     
     
 	public static void main(String[] args) {
-		System.out.println("Hello World");
+		GenerateData data = new GenerateData();
+		Game game = data.nuevo_juego();
+		game.mostrarDatos();
 	}
 }
