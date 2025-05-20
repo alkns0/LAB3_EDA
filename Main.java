@@ -10,7 +10,8 @@ public class Main {
         String category;
         int prince;
         int quality;
-        
+
+	//Crear juego con atributos aleatorios
         public Game nuevo_juego(){
             String[] palabras = {"Dragon", "Empire", "Quest", "Galaxy","Legends", "Warrior"};
             int rnd1 = new Random().nextInt(palabras.length);
@@ -26,6 +27,17 @@ public class Main {
             
             Game game = new Game(nombre_juego,categoria_juego, rnd4, rnd5);
             return game;
+        }
+
+	//Lista de N juegos
+        public ArrayList <Game> crearListaJuegos(){
+            ArrayList <Game> lista = new ArrayList<Game>();
+            int n = 100;
+            for(int i = 0; i < n; i++){
+                Game game = this.nuevo_juego();
+                lista.add(game);
+            }
+            return lista;
         }
         
     }
