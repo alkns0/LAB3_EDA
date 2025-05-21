@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
-    
+    //GenerateData : Clase encargada de generar datos (Juegos).
     public static class GenerateData {
         ArrayList<Game> lista = new ArrayList<Game>(); 
         String name;
@@ -41,7 +41,7 @@ public class Main {
         }
         
     }
-    
+    //Clase Game
     public static class Game {
         String name;
         String category;
@@ -64,7 +64,7 @@ public class Main {
         
     }
     
-    
+    //Clase DataSet: Contendrá a todos los videojuegos creados.
     public class Dataset {
         ArrayList <Game> data = new ArrayList <Game>();
         String sortedByAttribute;
@@ -72,37 +72,39 @@ public class Main {
         public Dataset(ArrayList <Game> data){
             this.data = data;
         }
-        
+        //Buscar juegos por precio
         public ArrayList<Game> getGameByPrice(int price){
             ArrayList <Game> lista = new ArrayList <Game>();
             return lista;
         }
-        
+        //Buscar juegos por rango de precios
         public ArrayList<Game> getGamesByPriceRange(int lowerPrice, int higherPrice){
             ArrayList <Game> lista = new ArrayList <Game>();
             return lista;          
         }
-    
+    	//Buscar juegos por categoría
         public ArrayList<Game> getGamesByCategory(String category){
             ArrayList <Game> lista = new ArrayList <Game>();
             return lista;              
         }
-        
+        //Buscar juegos por calidad
         public ArrayList<Game> getGamesByQuality(int quality){
             ArrayList <Game> lista = new ArrayList <Game>();
             return lista;            
         }
-        
+        //Ordenar database por algoritmo entregado por parámetros.
         public void sortByAlgorithm(String algorithm, String attribute){
             System.out.println("Ordenar según parametros");
         }
         
     }
     
-    
+    	
 	public static void main(String[] args) {
+		//Pruebas
 		GenerateData data = new GenerateData();
 		Game game = data.nuevo_juego();
 		game.mostrarDatos();
+		ArrayList <Game> lista = data.crearListaJuegos();
 	}
 }
