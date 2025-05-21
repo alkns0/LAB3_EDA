@@ -55,7 +55,7 @@ public class Main {
             this.quality = quality;
         }
         
-        void mostrarDatos(){
+        public void mostrarDatos(){
             System.out.println("Nombre: " + this.name);
             System.out.println("Categoria: " + this.category);
             System.out.println("Precio: " + this.price);
