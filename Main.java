@@ -229,8 +229,13 @@ public class Main {
 	public static void main(String[] args) {
 		//Pruebas
 		GenerateData data = new GenerateData();
-		Game game = data.nuevo_juego();
-		game.mostrarDatos();
-		ArrayList <Game> lista = data.crearListaJuegos();
+		ArrayList <Game> lista_juegos = data.crearListaJuegos();
+		Dataset data_set = new Dataset(lista_juegos);
+		//data_set.getGameByPrice(23041);
+	    //data_set.getGamesByPriceRange(10000, 20000);
+		//data_set.getGamesByCategory("Aventura");
+		//data_set.getGamesByQuality(20);
+		//Game game = data.nuevo_juego();
+		//game.mostrarDatos();
 	}
 }
