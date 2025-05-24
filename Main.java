@@ -56,48 +56,174 @@ public class Main {
         }
         
         public void mostrarDatos(){
-            System.out.println("Nombre: " + this.name);
-            System.out.println("Categoria: " + this.category);
-            System.out.println("Precio: " + this.price);
-            System.out.println("Calidad: " + this.quality);
+            System.out.println(
+            "Nombre: " + this.name
+            + "  Categoria: " + this.category
+            + "  Precio: " + this.price
+            + "  Calidad " + this.quality
+            );
         }
         
     }
     
-    //Clase DataSet: Contendrá a todos los videojuegos creados.
-    public class Dataset {
+    /*Clase DataSet: Contendrá a todos los videojuegos creados y tendrá algoritmos de
+    búsqueda y ordenamiento */
+    public static class Dataset {
         ArrayList <Game> data = new ArrayList <Game>();
         String sortedByAttribute;
         
         public Dataset(ArrayList <Game> data){
             this.data = data;
         }
+        
         //Buscar juegos por precio
         public ArrayList<Game> getGameByPrice(int price){
             ArrayList <Game> lista = new ArrayList <Game>();
+            
+            //Búsqueda lineal
+            for(int i = 0; i < data.size(); i++){
+                Game elemento = this.data.get(i);
+                if (elemento.price == price) {
+                    elemento.mostrarDatos();
+                    lista.add(elemento);
+                }
+            }
+            if (lista.isEmpty()){ 
+                System.out.println("No se encontró ningún juego con ese precio!");   
+            }
             return lista;
         }
+        
         //Buscar juegos por rango de precios
         public ArrayList<Game> getGamesByPriceRange(int lowerPrice, int higherPrice){
             ArrayList <Game> lista = new ArrayList <Game>();
+            
+            //Búsqueda lineal
+            for(int i = 0; i < data.size(); i++){
+                Game elemento = this.data.get(i);
+                if ((elemento.price >= lowerPrice) && (elemento.price <= higherPrice)) {
+                    elemento.mostrarDatos();
+                    lista.add(elemento);
+                }
+            }
+            if (lista.isEmpty()){ 
+                System.out.println("No se encontró ningún juego dentro del rango!");   
+            }
             return lista;          
         }
+    	
     	//Buscar juegos por categoría
         public ArrayList<Game> getGamesByCategory(String category){
             ArrayList <Game> lista = new ArrayList <Game>();
+            
+            //Búsqueda lineal
+            for(int i = 0; i < data.size(); i++){
+                Game elemento = this.data.get(i);
+                if (elemento.category == category) {
+                    elemento.mostrarDatos();
+                    lista.add(elemento);
+                }
+            }
+            if (lista.isEmpty()){ 
+                System.out.println("No se encontró ningún juego con esa categoría!");   
+            }
+            
             return lista;              
         }
+        
         //Buscar juegos por calidad
         public ArrayList<Game> getGamesByQuality(int quality){
             ArrayList <Game> lista = new ArrayList <Game>();
+            //Búsqueda lineal
+            for(int i = 0; i < data.size(); i++){
+                Game elemento = this.data.get(i);
+                if (elemento.quality == quality) {
+                    elemento.mostrarDatos();
+                    lista.add(elemento);
+                }
+            }
+            
+            if (lista.isEmpty()){ 
+                System.out.println("No se encontró ningún juego con esa calidad!");   
+            }
+            
             return lista;            
         }
         //Ordenar database por algoritmo entregado por parámetros.
         public void sortByAlgorithm(String algorithm, String attribute){
             System.out.println("Ordenar según parametros");
+            switch(algorithm){
+                case "bubbleSort":
+                    switch(attribute){
+                        case "price":
+                            break;
+                        case "category":
+                            break;
+                        case "quality":
+                            break;
+                        default:
+                            //Ordenar por precio
+                            break;
+                    }
+                    break;
+                case "insertionSort":
+                    switch(attribute){
+                        case "price":
+                            break;
+                        case "category":
+                            break;
+                        case "quality":
+                            break;
+                        default:
+                            //Ordenar por precio
+                            break;
+                    }
+                    break;
+                case "mergeSort":
+                    switch(attribute){
+                        case "price":
+                            break;
+                        case "category":
+                            break;
+                        case "quality":
+                            break;
+                        default:
+                            //Ordenar por precio
+                            break;
+                    }
+                    break;
+                case "quickSort":
+                    switch(attribute){
+                        case "price":
+                            break;
+                        case "category":
+                            break;
+                        case "quality":
+                            break;
+                        default:
+                            //Ordenar por precio
+                            break;
+                    }
+                    break;
+                default:
+                    //Usar Collections.sort()
+                    switch(attribute){
+                        case "price":
+                            break;
+                        case "category":
+                            break;
+                        case "quality":
+                            break;
+                        default:
+                            //Ordenar por precio
+                            break;
+                    }
+                    break;
+            }
         }
         
     }
+    
     
     	
 	public static void main(String[] args) {
