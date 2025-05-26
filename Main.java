@@ -192,7 +192,7 @@ public class Main {
                             swapped = true;
                         }
                     }
-                    if (!swapped) break; // Si no hubo intercambios, ya está ordenado
+                    if (!swapped) break;
                 }
         
                 return juegos;
@@ -201,27 +201,126 @@ public class Main {
         
         //Algoritmo insertionSort
         public class insertionSort {
-            public static ArrayList <Game> ordenar (ArrayList <Game> juegos, Comparator<Game> comparator){
+            public static ArrayList<Game> ordenar(ArrayList<Game> juegos, Comparator<Game> comparator) {
+                for (int i = 1; i < juegos.size(); i++) {
+                    Game key = juegos.get(i);
+                    int j = i - 1;
+                    
+                    while (j >= 0 && comparator.compare(juegos.get(j), key) > 0) {
+                        juegos.set(j + 1, juegos.get(j));
+                        j--;
+                    }
+                    
+                    juegos.set(j + 1, key);
+                }
                 return juegos;
             }
         }
 
 	//Algoritmo selectionSort
         public class selectionSort {
-            public static ArrayList <Game> ordenar (ArrayList <Game> juegos, Comparator<Game> comparator){
+            public static ArrayList<Game> ordenar(ArrayList<Game> juegos, Comparator<Game> comparator) {
+                int n = juegos.size();
+        
+                for (int i = 0; i < n - 1; i++) {
+                    int minIndex = i;
+        
+                    for (int j = i + 1; j < n; j++) {
+                        if (comparator.compare(juegos.get(j), juegos.get(minIndex)) < 0) {
+                            minIndex = j;
+                        }
+                    }
+        
+                    if (minIndex != i) {
+                        Game temp = juegos.get(i);
+                        juegos.set(i, juegos.get(minIndex));
+                        juegos.set(minIndex, temp);
+                    }
+                }
+        
                 return juegos;
             }
         }
-	//Algorirmo mergeSort
+        
+    	//Algorirmo mergeSort
         public class mergeSort {
-            public static ArrayList <Game> ordenar (ArrayList <Game> juegos, Comparator<Game> comparator){
-                return juegos;
+            public static ArrayList<Game> ordenar(ArrayList<Game> juegos, Comparator<Game> comparator) {
+                if (juegos.size() <= 1) {
+                    return juegos;
+                }
+        
+                int mid = juegos.size() / 2;
+                ArrayList<Game> izquierda = new ArrayList<>(juegos.subList(0, mid));
+                ArrayList<Game> derecha = new ArrayList<>(juegos.subList(mid, juegos.size()));
+        
+                izquierda = ordenar(izquierda, comparator);
+                derecha = ordenar(derecha, comparator);
+        
+                return merge(izquierda, derecha, comparator);
+            }
+        
+            private static ArrayList<Game> merge(ArrayList<Game> izquierda, ArrayList<Game> derecha, Comparator<Game> comparator) {
+                ArrayList<Game> resultado = new ArrayList<>();
+                int i = 0, j = 0;
+        
+                while (i < izquierda.size() && j < derecha.size()) {
+                    if (comparator.compare(izquierda.get(i), derecha.get(j)) <= 0) {
+                        resultado.add(izquierda.get(i));
+                        i++;
+                    } else {
+                        resultado.add(derecha.get(j));
+                        j++;
+                    }
+                }
+    
+                while (i < izquierda.size()) {
+                    resultado.add(izquierda.get(i));
+                    i++;
+                }
+        
+                while (j < derecha.size()) {
+                    resultado.add(derecha.get(j));
+                    j++;
+                }
+        
+                return resultado;
             }
         }
-	//Algoritmo quickSort
+        
+    	//Algoritmo quickSort
         public class quickSort {
-            public static ArrayList <Game> ordenar (ArrayList <Game> juegos, Comparator<Game> comparator){
-                return juegos;
+            public static void ordenar(ArrayList<Game> juegos, Comparator<Game> comparator) {
+                quickSortRec(juegos, 0, juegos.size() - 1, comparator);
+            }
+        
+            private static void quickSortRec(ArrayList<Game> juegos, int low, int high, Comparator<Game> comparator) {
+                if (low < high) {
+                    int pi = partition(juegos, low, high, comparator);
+                    quickSortRec(juegos, low, pi - 1, comparator);
+                    quickSortRec(juegos, pi + 1, high, comparator);
+                }
+            }
+        
+            private static int partition(ArrayList<Game> juegos, int low, int high, Comparator<Game> comparator) {
+                Game pivot = juegos.get(high);
+                int i = low - 1;
+        
+                for (int j = low; j < high; j++) {
+                    if (comparator.compare(juegos.get(j), pivot) <= 0) {
+                        i++;
+                        // swap juegos[i] y juegos[j]
+                        Game temp = juegos.get(i);
+                        juegos.set(i, juegos.get(j));
+                        juegos.set(j, temp);
+                    }
+                }
+        
+                // swap juegos[i+1] y juegos[high] (el pivot)
+                Game temp = juegos.get(i + 1);
+                juegos.set(i + 1, juegos.get(high));
+                juegos.set(high, temp);
+        
+                return i + 1;
             }
         }
 	
@@ -357,7 +456,7 @@ public class Main {
 	    	data_set.mostrarListaDeJuegos();	
 	    
 	   	data_set.sortByAlgorithm("BubbleSort","quality");
-	   	 data_set.mostrarListaDeJuegos();
+	   	data_set.mostrarListaDeJuegos();
 	    
 		//data_set.getGameByPrice(23041);
 	    	//data_set.getGamesByPriceRange(10000, 20000);
