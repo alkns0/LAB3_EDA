@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Comparator;
+import java.util.Collections;
 
 public class Main {
     //GenerateData : Clase encargada de generar datos (Juegos).
@@ -236,15 +237,19 @@ public class Main {
                     switch(attribute){
                         case "price":
                             BubbleSort.ordenar(data, comp);
+                            sortedByAttribute = "price";
                             break;
                         case "category":
                             BubbleSort.ordenar(data, comp2);
+                            sortedByAttribute = "category";
                             break;
                         case "quality":
-                            BubbleSort.ordenar(data, comp3);                           
+                            BubbleSort.ordenar(data, comp3);
+                            sortedByAttribute = "quality";
                             break;
                         default:
                             BubbleSort.ordenar(data, comp);
+                            sortedByAttribute = "price";
                             break;
                     }
                     break;
@@ -252,31 +257,39 @@ public class Main {
                     switch(attribute){
                         case "price":
                             insertionSort.ordenar(data, comp);
+                            sortedByAttribute = "price";
                             break;
                         case "category":
                             insertionSort.ordenar(data, comp2);
+                            sortedByAttribute = "category";
                             break;
                         case "quality":
                             insertionSort.ordenar(data, comp3);
+                            sortedByAttribute = "quality";
                             break;
                         default:
                             insertionSort.ordenar(data, comp);
+                            sortedByAttribute = "price";
                             break;
                     }
                     break;
                 case "mergeSort":
                     switch(attribute){
                         case "price":
-                            mergeSort.ordenar(data, comp);			
+                            mergeSort.ordenar(data, comp);	
+                            sortedByAttribute = "price";
                             break;
                         case "category":
-                            mergeSort.ordenar(data, comp2);			
+                            mergeSort.ordenar(data, comp2);		
+                            sortedByAttribute = "category";
                             break;
                         case "quality":
                             mergeSort.ordenar(data, comp3);	
+                            sortedByAttribute = "quality";
                             break;
                         default:
-                            mergeSort.ordenar(data, comp);	
+                            mergeSort.ordenar(data, comp);
+                            sortedByAttribute = "price";
                             break;
                     }
                     break;
@@ -284,15 +297,19 @@ public class Main {
                     switch(attribute){
                         case "price":
                             quickSort.ordenar(data, comp);	
+                            sortedByAttribute = "price";
                             break;
                         case "category":
                             quickSort.ordenar(data, comp2);
+                            sortedByAttribute = "category";
                             break;
                         case "quality":
                             quickSort.ordenar(data, comp3);
+                            sortedByAttribute = "quality";
                             break;
                         default:
                             quickSort.ordenar(data, comp);	
+                            sortedByAttribute = "price";
                             break;
                     }
                     break;
@@ -300,26 +317,50 @@ public class Main {
                     //Usar Collections.sort()
                     switch(attribute){
                         case "price":
+                            Collections.sort(data, (g1, g2) -> Integer.compare(g1.price, g2.price));
+                            sortedByAttribute = "price";
                             break;
                         case "category":
+                            Collections.sort(data, (g1, g2) -> g1.category.compareTo(g2.category));
+                            sortedByAttribute = "category";
                             break;
                         case "quality":
+                            Collections.sort(data, (g1, g2) -> Integer.compare(g1.quality, g2.quality));
+                            sortedByAttribute = "quality";
                             break;
                         default:
-                            //Ordenar por precio
+                            Collections.sort(data, (g1, g2) -> Integer.compare(g1.price, g2.price));
+                            sortedByAttribute = "price";
                             break;
                     }
                     break;
             }
         }
+    
+    	//Mostrar Lista de juegos totales
+	    public void mostrarListaDeJuegos() {
+	        for(int i = 0; i < data.size(); i++){
+	            data.get(i).mostrarDatos();
+	        }
+	    }
     }
 	public static void main(String[] args) {
 		//Pruebas
 		GenerateData data = new GenerateData();
 		ArrayList <Game> lista_juegos = data.crearListaJuegos();
 		Dataset data_set = new Dataset(lista_juegos);
+		
+		data_set.sortByAlgorithm("BubbleSort","price");
+	    	data_set.mostrarListaDeJuegos();
+	    
+		data_set.sortByAlgorithm("BubbleSort","category");
+	    	data_set.mostrarListaDeJuegos();	
+	    
+	   	data_set.sortByAlgorithm("BubbleSort","quality");
+	   	 data_set.mostrarListaDeJuegos();
+	    
 		//data_set.getGameByPrice(23041);
-	    //data_set.getGamesByPriceRange(10000, 20000);
+	    	//data_set.getGamesByPriceRange(10000, 20000);
 		//data_set.getGamesByCategory("Aventura");
 		//data_set.getGamesByQuality(20);
 		//Game game = data.nuevo_juego();
