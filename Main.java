@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Comparator;
 
 public class Main {
     //GenerateData : Clase encargada de generar datos (Juegos).
@@ -149,59 +150,149 @@ public class Main {
             
             return lista;            
         }
+
+        //Comparador por precio
+        public class ComparadorPorPrecio implements Comparator <Game> {
+            @Override
+            public int compare(Game g1, Game g2){
+                return Double.compare(g1.price, g2.price);
+            }
+            
+        }
+        //Comparador por categoría
+        public class ComparadorPorCategoria implements Comparator <Game> {
+            @Override
+            public int compare(Game g1, Game g2){
+                return g1.category.compareToIgnoreCase(g2.category);
+            }
+        }
+        //Comparador por calidad
+        public class ComparadorPorCalidad implements Comparator <Game> {
+            @Override
+            public int compare(Game g1, Game g2){
+                return Double.compare(g1.quality, g2.quality);
+            }
+        }
+	
+        //Algoritmo BubbleSort
+        public class BubbleSort {
+           public static ArrayList<Game> ordenar(ArrayList<Game> juegos, Comparator<Game> comparador) {
+                int n = juegos.size();
+                boolean swapped;
+        
+                for (int i = 0; i < n - 1; i++) {
+                    swapped = false;
+                    for (int j = 0; j < n - i - 1; j++) {
+                        if (comparador.compare(juegos.get(j), juegos.get(j + 1)) > 0) {
+                            // Intercambiar elementos
+                            Game temp = juegos.get(j);
+                            juegos.set(j, juegos.get(j + 1));
+                            juegos.set(j + 1, temp);
+                            swapped = true;
+                        }
+                    }
+                    if (!swapped) break; // Si no hubo intercambios, ya está ordenado
+                }
+        
+                return juegos;
+            }            
+        }
+        
+        //Algoritmo insertionSort
+        public class insertionSort {
+            public static ArrayList <Game> ordenar (ArrayList <Game> juegos, Comparator<Game> comparator){
+                return juegos;
+            }
+        }
+
+	//Algoritmo selectionSort
+        public class selectionSort {
+            public static ArrayList <Game> ordenar (ArrayList <Game> juegos, Comparator<Game> comparator){
+                return juegos;
+            }
+        }
+	//Algorirmo mergeSort
+        public class mergeSort {
+            public static ArrayList <Game> ordenar (ArrayList <Game> juegos, Comparator<Game> comparator){
+                return juegos;
+            }
+        }
+	//Algoritmo quickSort
+        public class quickSort {
+            public static ArrayList <Game> ordenar (ArrayList <Game> juegos, Comparator<Game> comparator){
+                return juegos;
+            }
+        }
+	
+        ComparadorPorPrecio comp = new ComparadorPorPrecio();
+        ComparadorPorCategoria comp2 = new ComparadorPorCategoria();
+        ComparadorPorCalidad comp3 = new ComparadorPorCalidad();
+        
         //Ordenar database por algoritmo entregado por parámetros.
         public void sortByAlgorithm(String algorithm, String attribute){
-            System.out.println("Ordenar según parametros");
+            System.out.println("Se ordenó la lista con el algritmo " + algorithm + " por el atributo " + attribute);
             switch(algorithm){
                 case "bubbleSort":
                     switch(attribute){
                         case "price":
+                            BubbleSort.ordenar(data, comp);
                             break;
                         case "category":
+                            BubbleSort.ordenar(data, comp2);
                             break;
                         case "quality":
+                            BubbleSort.ordenar(data, comp3);                           
                             break;
                         default:
-                            //Ordenar por precio
+                            BubbleSort.ordenar(data, comp);
                             break;
                     }
                     break;
                 case "insertionSort":
                     switch(attribute){
                         case "price":
+                            insertionSort.ordenar(data, comp);
                             break;
                         case "category":
+                            insertionSort.ordenar(data, comp2);
                             break;
                         case "quality":
+                            insertionSort.ordenar(data, comp3);
                             break;
                         default:
-                            //Ordenar por precio
+                            insertionSort.ordenar(data, comp);
                             break;
                     }
                     break;
                 case "mergeSort":
                     switch(attribute){
                         case "price":
+                            mergeSort.ordenar(data, comp);			
                             break;
                         case "category":
+                            mergeSort.ordenar(data, comp2);			
                             break;
                         case "quality":
+                            mergeSort.ordenar(data, comp3);	
                             break;
                         default:
-                            //Ordenar por precio
+                            mergeSort.ordenar(data, comp);	
                             break;
                     }
                     break;
                 case "quickSort":
                     switch(attribute){
                         case "price":
+                            quickSort.ordenar(data, comp);	
                             break;
                         case "category":
+                            quickSort.ordenar(data, comp2);
                             break;
                         case "quality":
+                            quickSort.ordenar(data, comp3);
                             break;
                         default:
-                            //Ordenar por precio
+                            quickSort.ordenar(data, comp);	
                             break;
                     }
                     break;
@@ -221,11 +312,7 @@ public class Main {
                     break;
             }
         }
-        
     }
-    
-    
-    	
 	public static void main(String[] args) {
 		//Pruebas
 		GenerateData data = new GenerateData();
